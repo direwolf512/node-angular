@@ -1,0 +1,182 @@
+/**
+ * @fileOverview
+ * @author ISS
+ */
+
+(function () {
+  'use strict';
+
+  angular
+    .module('app.core')
+    .factory('dataservice', dataservice);
+
+  dataservice.$inject = ['$http', '$cookies', '$q', 'exception', 'logger'];
+
+  /* @ngInject */
+  function dataservice ($http, $cookies, $q, exception, logger) {
+    var isPrimed = false;
+    var primePromise;
+
+    var service = {
+      /*
+       * Account
+       */
+      checkLogin: checkLogin,
+      getSuggestionAward: getSuggestionAward,
+      addSuggestion: addSuggestion,
+      deleteSuggestion: deleteSuggestion,
+      setAttention: setAttention,
+      // 公共方法
+      ready: ready
+
+    };
+
+    return service;
+
+    //////////////////////////////////////////////////
+
+    /**
+     * 验证用户是否登录
+     * @returns {Object} promise
+     */
+    function checkLogin () {
+      var _config = {
+        url: '/account/checklogin'
+      };
+      return _commonAjax(_config);
+    }
+
+    /*
+     *关注
+     * @param id 被关注人id
+     * @returns {Object}
+     */
+    function setAttention (id) {
+      var _config = {
+        method: 'POST',
+        url: '/user/user/' + id + '/follow'
+      };
+
+      return _commonAjax(_config);
+    }
+
+
+    /**
+     * 最新打赏
+     * @param {Object} params - 打赏条数
+     * @returns {Object} getSuggestionTop promise
+     */
+    function getSuggestionAward (params) {
+      var _config = {
+        url: '/user/suggestion/awarded',
+        params: params || {
+          limit: 10
+        }
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 新增或修改 建议
+     * @param {Object} config - 配置对象
+     * @param {string} config.id - 建议id (如果存在, 说明是修改操作)
+     * @param {Object} config.data - form 数据
+     * @returns {Object} - Promise
+     */
+    function addSuggestion (config) {
+      var url = (!!config.id) ? ('/user/suggestion/' + config.id) : ('/user/suggestion');
+      var _config = {
+        headers: config.headers,
+        method: 'POST',
+        url: url,
+        data: config.data
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 删除建议
+     * @param {Object} config - 参数对象
+     * @param {number} config.id - 建议id
+     * @returns {Object} - Promise
+     */
+    function deleteSuggestion (config) {
+      var _config = {
+        method: 'DELETE',
+        url: '/user/suggestion/' + config.id
+      };
+      return _commonAjax(_config);
+    }
+
+
+    //////////////////////////////////////////////////
+
+    /**
+     * @func _commonAjax
+     * @desc 通用方法
+     * @param {Object} config - $http config
+     * @returns {Object} $http promise
+     */
+    function _commonAjax (config) {
+      var defer = $q.defer();
+      var headers = angular.merge({}, config.headers, {'X-CSRF-TOKEN': $cookies.get('connect_csrf') || ''});
+      var _config = {
+        headers: headers,
+        method: config.method || 'GET',
+        url: config.url || '/',
+        params: config.params || {},
+        data: config.data || {}
+      };
+      var errInfo = 'XHR Failed for api ' + config.url;
+      // 解决IE缓存问题 : get请求的随机token参数
+      if (_config.method === 'GET') {
+        _config.url = _config.url + '?token=' + Math.random();
+      }
+
+      $http(_config)
+        .then(commonAjaxComplete, commonAjaxError)
+        .catch(function (message) {
+          exception.catcher(errInfo)(message);
+        });
+
+      return defer.promise;
+
+      //////////////////////////////////////////////////
+
+      function commonAjaxComplete (data) {
+        defer.resolve(data);
+      }
+
+      function commonAjaxError (err) {
+        defer.reject(err);
+      }
+    }
+
+    function _prime () {
+      // This function can only be called once.
+      if (isPrimed) {
+        return primePromise;
+      }
+      primePromise = $q.when(true).then(success);
+      return primePromise;
+
+      function success () {
+        isPrimed = true;
+        logger.info('Primed data');
+      }
+    }
+
+    function ready (nextPromises) {
+      var readyPromise = primePromise || _prime();
+
+      return readyPromise
+        .then(function () {
+          return $q.all(nextPromises);
+        })
+        .catch(exception.catcher(' ready function failed '));
+    }
+  }
+})();
+
