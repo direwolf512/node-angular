@@ -12,6 +12,5 @@
   Shell.$inject = [];
   function Shell () {
     var vm = this;
-    vm.title = '1111111111';
   }
 })();

@@ -32,7 +32,7 @@
       $routeProvider = routehelperConfig().config.$routeProvider,
       service = {
         configureRoutes: configureRoutes,
-        getRoutes: getRoute,
+        getRoutes: getRoutes,
         routeCounts: routeCounts
       };
     init();

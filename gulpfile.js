@@ -24,10 +24,17 @@ gulp.task('stylus', function () {
 });
 
 gulp.task('inject', function () {
-  var cssSources = gulp.src(['./src/client/app/_tmp/*.css']),
-    jsSources = gulp.src(['./src/client/app/**/*.js', '!./src/client/app/bower_components/**/*.js'])
+  var cssSources = gulp.src(['./src/client/app/_tmp/*.css', '!./src/client/app/bower_components/**/*.css']),
+    moduleSources = gulp.src(['./src/client/app/**/*.module.js']),
+    jsSources = gulp.src(['./src/client/app/**/*.js', '!./src/client/app/**/*.module.js', '!./src/client/app/bower_components/**/*.js'])
       .pipe(angularFilesort()),
     cssOptions = {
+      ignorePath: '/src/client/app',
+      addPrefix: './app',
+      addRootSlash: false
+    },
+    moduleOptions = {
+      name: 'module',
       ignorePath: '/src/client/app',
       addPrefix: './app',
       addRootSlash: false
@@ -39,6 +46,7 @@ gulp.task('inject', function () {
     };
   gulp.src('./src/client/index.html')
     .pipe(inject(jsSources, jsOptions))
+    .pipe(inject(moduleSources, moduleOptions))
     .pipe(inject(cssSources, cssOptions))
     .pipe(wiredep({
       optional: 'configuration',
@@ -53,4 +61,14 @@ gulp.task('serve', function () {
   gulp.watch('./src/client/app/**/*.js', ['concatUglify']);
 });
 
-gulp.task('default', ['inject', 'stylus', 'serve']);
+gulp.task('browser-sync', function() {
+  browserSync.init({
+    server: {
+      baseDir: "./src/client",
+      index: 'index.html'
+    },
+    port: 8580
+  });
+});
+
+gulp.task('default', ['browser-sync', 'inject', 'stylus', 'serve']);
