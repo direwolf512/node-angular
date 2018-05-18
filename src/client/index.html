@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <base href="/">
   <!-- bower:css -->
+  <link rel="stylesheet" href="app/bower_components/toastr/toastr.css" />
   <!-- endbower -->
 
   <!-- inject:css -->
@@ -16,16 +18,27 @@
   <!-- bower:js -->
   <script src="app/bower_components/angular/angular.js"></script>
   <script src="app/bower_components/moment/moment.js"></script>
+  <script src="app/bower_components/angular-route/angular-route.js"></script>
+  <script src="app/bower_components/jquery/dist/jquery.js"></script>
+  <script src="app/bower_components/toastr/toastr.js"></script>
   <!-- endbower -->
 
   <!-- module:js -->
+
   <script src="./app/app.module.js"></script>
+
   <script src="./app/article/article.module.js"></script>
+
   <script src="./app/core/core.module.js"></script>
+
   <script src="./app/layout/layout.module.js"></script>
+
   <script src="./app/blocks/http/http.module.js"></script>
+
   <script src="./app/blocks/logger/logger.module.js"></script>
+
   <script src="./app/blocks/router/router.module.js"></script>
+
   <!-- endinject -->
 
   <!-- inject:js -->

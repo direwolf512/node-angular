@@ -29,7 +29,7 @@
         changes: 0
       },
       routes = [],
-      $routeProvider = routehelperConfig().config.$routeProvider,
+      $routeProvider = routehelperConfig.config.$routeProvider,
       service = {
         configureRoutes: configureRoutes,
         getRoutes: getRoutes,
@@ -41,12 +41,12 @@
 
     function configureRoutes (routes) {
       routes.forEach(function (route) {
-        route.config.resolve = angular.entend(route.config.resolve || {}, routehelperConfig.config.resolveAlways);
-        $routeProvider.when(route.url, route.config)
+        route.config.resolve = angular.extend(route.config.resolve || {}, routehelperConfig.config.resolveAlways);
+        $routeProvider.when(route.url, route.config);
       });
       $routeProvider.otherwise({
         redirectTo: '/'
-      })
+      });
     }
 
     function getRoutes () {
@@ -78,7 +78,7 @@
     }
 
     function handleRoutingErrors () {
-      $rootScope.$on('$routeChangeError', function () {
+      $rootScope.$on('$routeChangeError', function (event, current, previous, rejection) {
         var destination = '';
         var msg = '';
         if (handlingRouteChangeError) {
@@ -86,7 +86,7 @@
         }
         handlingRouteChangeError = true;
         routeCounts.errors++;
-        destination = (current && (current.title || current.name || current.loadedTemplateUrl) ) || 'unknown target';
+        destination = (current && (current.title || current.name || current.loadedTemplateUrl)) || 'unknown target';
         msg = 'Error routing to ' + destination + '.' + (rejection.msg || '');
 
         logger.warning(msg, [current]);

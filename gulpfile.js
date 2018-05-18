@@ -58,7 +58,7 @@ gulp.task('inject', function () {
 gulp.task('serve', function () {
   gulp.watch('./src/client/app/**/*.html').on('change', reload);
   gulp.watch('./src/client/styles/*.styl', ['stylus']);
-  gulp.watch('./src/client/app/**/*.js', ['concatUglify']);
+  //gulp.watch('./src/client/app/**/*.js', ['concatUglify']);
 });
 
 gulp.task('browser-sync', function() {

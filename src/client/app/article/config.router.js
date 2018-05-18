@@ -23,7 +23,6 @@
   }
 
   function getRoutes () {
-
     return [
       {
         url: '/',
