@@ -14,10 +14,9 @@
 
   function routehelperConfig () {
     var self = this;
-
     this.$get = function () {
       return {
-        config: self.config
+        config: self
       }
     }
   }
@@ -41,7 +40,7 @@
 
     function configureRoutes (routes) {
       routes.forEach(function (route) {
-        route.config.resolve = angular.extend(route.config.resolve || {}, routehelperConfig.config.resolveAlways);
+        route.config.resolve = angular.extend(route.config.resolve || {}, routehelperConfig.resolveAlways);
         $routeProvider.when(route.url, route.config);
       });
       $routeProvider.otherwise({

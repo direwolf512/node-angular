@@ -27,12 +27,23 @@
    */
   core.config(configure);
 
-  configure.$inject = ['$locationProvider'];
+  configure.$inject = ['$locationProvider', '$routeProvider', 'routehelperConfigProvider'];
 
   /* @ngInject */
-  function configure ($locationProvider) {
+  function configure ($locationProvider, $routeProvider, routehelperConfigProvider) {
     // 开启 html5 mode 模式
     $locationProvider.html5Mode(true).hashPrefix('!');
+    routehelperConfigProvider.$routeProvider = $routeProvider;
 
+    var resolveAlways = {
+      /* @ngInject */
+      // ready: function(dataservice) {
+      //  return dataservice.ready();
+      // }
+      ready: ['dataservice', function (dataservice) {
+        return dataservice.ready();
+      }]
+    };
+    routehelperConfigProvider.resolveAlways = resolveAlways;
   }
 })();
