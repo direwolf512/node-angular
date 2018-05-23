@@ -10,15 +10,17 @@
     .module('app.article')
     .controller('Article', Article);
 
-  Article.$inject = [];
+  Article.$inject = ['dataservice'];
 
-  function Article () {
+  function Article (dataservice) {
     var vm = this;
 
     active();
 
     function active () {
-
+      dataservice.getArticles().then(function (res) {
+        console.log(res);
+      })
     }
   }
 })();

@@ -10,10 +10,10 @@
     .module('app.core')
     .factory('dataservice', dataservice);
 
-  dataservice.$inject = ['$http', '$cookies', '$q', 'exception', 'logger'];
+  dataservice.$inject = ['$http', '$q', 'exception', 'logger'];
 
   /* @ngInject */
-  function dataservice ($http, $cookies, $q, exception, logger) {
+  function dataservice ($http, $q, exception, logger) {
     var isPrimed = false;
     var primePromise;
 
@@ -26,6 +26,7 @@
       addSuggestion: addSuggestion,
       deleteSuggestion: deleteSuggestion,
       setAttention: setAttention,
+      getArticles: getArticles,
       // 公共方法
       ready: ready
 
@@ -78,6 +79,18 @@
     }
 
     /**
+     * 获取文章列表
+     * @returns {Object}
+     */
+    function getArticles () {
+      var _config = {
+        url: 'http://localhost:8900'
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
      * 新增或修改 建议
      * @param {Object} config - 配置对象
      * @param {string} config.id - 建议id (如果存在, 说明是修改操作)
@@ -121,7 +134,7 @@
      */
     function _commonAjax (config) {
       var defer = $q.defer();
-      var headers = angular.merge({}, config.headers, {'X-CSRF-TOKEN': $cookies.get('connect_csrf') || ''});
+      var headers = angular.merge({}, config.headers, {'X-CSRF-TOKEN': ''});
       var _config = {
         headers: headers,
         method: config.method || 'GET',
