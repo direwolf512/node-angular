@@ -1,0 +1,79 @@
+.article-home-wrap
+  .banner
+    box-sizing border-box
+    height 300px
+    padding 80px 50px 0
+    margin-bottom 30px
+    background url("../content/banner.jpg") no-repeat center
+    h2
+      margin-bottom 70px
+      text-align center
+      font-size 36px
+      color darkslategray
+    p
+      display flex
+      justify-content center
+      a
+        margin 0 10px
+        font-size 20px
+        color lightslategray
+      a:hover
+        color #00c1de
+  .hot-articles
+    padding 0 50px
+    h3
+      font-size 24px
+      text-align center
+      margin-bottom 20px
+    .hot-articles-box
+      display flex
+      flex-wrap wrap
+      justify-content space-between
+      width 100%
+      dl
+        display flex
+        width 49%
+        margin-bottom 8px
+        padding 5px
+        background #eee
+        dt
+          margin-right 10px
+          img
+            width 160px
+            height 90px
+        dd
+          flex 1
+          display flex
+          flex-direction column
+          overflow hidden
+          .header
+            overflow hidden
+            display flex
+            justify-content space-between
+            margin-bottom 5px
+            a
+              font-size 14px
+              color #000000
+            a:hover
+              color #00c1de
+            .title
+              flex 1
+              margin-right 8px
+              font-size 16px
+          .summary
+            height 48px
+            font-size 12px
+            line-height 16px
+            color #222
+            display -webkit-box
+            -webkit-box-orient vertical
+            -webkit-line-clamp 3
+            overflow hidden
+            margin-bottom 5px
+          .updated-at
+            font-size 12px
+            text-align right
+            color #666
+            align-content flex-end
+
+

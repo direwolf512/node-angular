@@ -21,6 +21,7 @@
     "gulp-inject": "^4.3.2",
     "gulp-stylus": "^2.7.0",
     "gulp-uglify": "^3.0.0",
+    "mysql": "^2.15.0",
     "wiredep": "^4.0.0"
   }
 }
