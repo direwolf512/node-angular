@@ -21,6 +21,19 @@
     toastr.options.positionClass = 'toast-bottom-right';
   }
 
+  /**
+   * config 配置 : 跨域
+   */
+  core.config(jsonpConfig);
+
+  jsonpConfig.$inject = ['$sceDelegateProvider'];
+
+  function jsonpConfig ($sceDelegateProvider) {
+    $sceDelegateProvider.resourceUrlWhitelist([
+      'self',
+      'http://localhost:3000'
+    ]);
+  }
 
   /**
    * config 配置

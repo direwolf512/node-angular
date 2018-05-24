@@ -27,6 +27,7 @@
       deleteSuggestion: deleteSuggestion,
       setAttention: setAttention,
       getArticles: getArticles,
+      login: login,
       // 公共方法
       ready: ready
 
@@ -35,6 +36,30 @@
     return service;
 
     //////////////////////////////////////////////////
+
+    /*
+     * 登录
+     * @param data 账号密码
+     * @returns {Object}
+     */
+    function login (data) {
+      var _config = {
+        method: 'POST',
+        url: 'http://localhost:3000/login',
+        data: data
+      };
+
+      return _commonAjax(_config);
+    }
+    /*function login (data) {
+      var _config = {
+        method: 'GET',
+        url: 'http://localhost:3000/login'
+      };
+
+      return _commonAjax(_config);
+    }*/
+
 
     /**
      * 验证用户是否登录
@@ -84,7 +109,7 @@
      */
     function getArticles () {
       var _config = {
-        url: 'http://localhost:8900'
+        url: 'http://localhost:3000/users'
       };
 
       return _commonAjax(_config);
@@ -134,9 +159,8 @@
      */
     function _commonAjax (config) {
       var defer = $q.defer();
-      var headers = angular.merge({}, config.headers, {'X-CSRF-TOKEN': ''});
       var _config = {
-        headers: headers,
+        headers: config.headers,
         method: config.method || 'GET',
         url: config.url || '/',
         params: config.params || {},

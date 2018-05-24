@@ -21,6 +21,13 @@
       dataservice.getArticles().then(function (res) {
         console.log(res);
       })
+      var data = {
+        username: 'user1',
+        password: '123456'
+      }
+      dataservice.login(data).then(function (res) {
+        console.log(res);
+      })
     }
   }
 })();
