@@ -3,11 +3,6 @@
  * @author ISS
  */
 
-/**
- * @fileOverview
- * @author bian17888 16/5/11 21:19
- */
-
 (function () {
   'use strict';
 
@@ -44,7 +39,15 @@
             content: '全部'
           }
         }
-      }
+      }, {
+				url: '/article/:id',
+				config: {
+					templateUrl: 'app/article/detail/index.html',
+					controller: 'ArticleDetail',
+					controllerAs: 'vm',
+					title: '详情'
+				}
+			}
     ];
   }
 })();

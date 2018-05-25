@@ -1,3 +1,46 @@
 body {
-  background: #abcdef;
+  margin: 0;
+  padding: 0;
+}
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6,
+body p,
+body dl,
+body dd,
+body dt,
+body ol,
+body li,
+body ul {
+  margin: 0;
+}
+body a {
+  text-decoration: none;
+}
+.m-overflow-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.m-nav {
+  height: 60px;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 50px;
+  background: #000;
+}
+.m-nav a {
+  margin: 0 5px;
+  padding: 0 10px;
+  font-size: 24px;
+  line-height: 60px;
+  color: #fff;
+  border-bottom: 2px solid transparent;
+}
+.m-nav a:hover {
+  color: #00c1d1;
+  border-bottom: 2px solid #00c1de;
 }
