@@ -11,6 +11,7 @@ var gulp = require('gulp'),
   uglify = require('gulp-uglify'),
   wiredep = require('wiredep').stream,
   browserSync = require('browser-sync').create(),
+  modRewrite = require('connect-modrewrite'),
   reload = browserSync.reload;
 
 gulp.task('stylus', function () {
@@ -67,7 +68,14 @@ gulp.task('browser-sync', function() {
       baseDir: "./src/client",
       index: 'index.html'
     },
-    port: 8580
+    port: 8580,
+    //解決刷新404
+    middleware: [
+      modRewrite([
+        '^/users\\S* /index.html [L]',
+        '^/article\\S* /index.html [L]'
+      ])
+    ]
   });
 });
 

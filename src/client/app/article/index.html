@@ -11,6 +11,9 @@
   </div>
   <div class="hot-articles">
     <h3>热门文章</h3>
+    <p class="article-all">
+      <a href="/article/all">查看全部</a>
+    </p>
     <div class="hot-articles-box">
       <dl ng-repeat="val in vm.articles | limitTo : 6">
         <dt>
@@ -28,5 +31,4 @@
       </dl>
     </div>
   </div>
-
 </section>

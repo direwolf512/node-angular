@@ -27,6 +27,7 @@
       deleteSuggestion: deleteSuggestion,
       setAttention: setAttention,
       getArticles: getArticles,
+      getUsers: getUsers,
       login: login,
       // 公共方法
       ready: ready
@@ -108,6 +109,18 @@
      * @returns {Object}
      */
     function getArticles () {
+      var _config = {
+        url: 'http://localhost:3000/articles'
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 获取用戶列表
+     * @returns {Object}
+     */
+    function getUsers () {
       var _config = {
         url: 'http://localhost:3000/users'
       };
