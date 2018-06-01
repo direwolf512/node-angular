@@ -70,16 +70,25 @@ router.post('/login', function(req, res) {
       for (var i = 0; i < results.length; i++) {
         if (results[i].username === _data.username) {
           if (results[i].password === _data.password) {
-            result = '登陆成功';
+            result = {
+              id: results[i].id,
+              msg: '登陆成功'
+            };
           } else {
-            result = '密码有误';
+            result = {
+              id: null,
+              msg:'密码有误'
+            };
           }
         }
       }
       if (!result) {
-        result = '用户名不存在';
+        result = {
+          id: null,
+          msg:'用户名不存在'
+        };
       }
-      result = JSON.stringify(result)
+      result = JSON.stringify(result);
       res.send(result);
     }
   });

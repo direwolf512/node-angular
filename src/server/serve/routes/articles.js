@@ -14,16 +14,39 @@ var connection = mysql.createConnection({
   database : 'test'
 });
 
-sql = 'select * from articles';
+articlesSql = 'select * from articles';
 
-connection.query(sql,function (err, results) {
-  if (err){
-    console.log(err)
-  }else{
-    router.get('/', function(req, res) {
+router.get('/', function(req, res) {
+  console.log(req.body);
+  connection.query(articlesSql,function (err, results) {
+    if (err){
+      console.log(err)
+    }else{
       res.send(results);
-    });
-  }
+    }
+  });
+});
+
+router.get('/*', function(req, res) {
+  var id = req.url.split('/')[1].split('?')[0];
+  searchArticleSql = 'select * from articles where id= "' + id + '"';
+  connection.query(searchArticleSql,function (err, results) {
+    if (err){
+      console.log(err)
+    }else{
+      var result = results[0],
+        userid = result.authorId;
+      usersSql = 'select * from user where id= "' + userid + '"';
+      connection.query(usersSql,function (err, results) {
+        if (err) {
+          console.log(err)
+        } else {
+          result.authorName = results[0].username;
+        }
+        res.send(result);
+      });
+    }
+  });
 });
 
 module.exports = router;

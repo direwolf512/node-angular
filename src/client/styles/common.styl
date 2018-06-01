@@ -14,16 +14,20 @@ body
 .m-nav
   height 60px
   display flex
-  justify-content flex-start
+  justify-content space-between
   padding 0 50px
   background #000
   a
-    margin 0 5px
     padding 0 10px
     font-size 24px
     line-height 60px
     color #fff
-    border-bottom 2px solid transparent
-  a:hover
-    color #00c1d1
-    border-bottom 2px solid #00c1de
+    cursor pointer
+  .nav-box
+    flex 1
+    a
+      margin 0 5px
+      border-bottom 2px solid transparent
+    a:hover
+      color #00c1d1
+      border-bottom 2px solid #00c1de

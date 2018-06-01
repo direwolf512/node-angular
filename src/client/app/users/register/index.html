@@ -1,11 +1,14 @@
 <section class="users-register">
   <form name="user">
     用户名：<input type="text" required name="username"
+    autocomplete="off"
     ng-model="vm.registerMsg.username"
     ng-change="vm.judgeName()">
     密码：<input type="password" required name="password1"
+    autocomplete="off"
     ng-model="vm.registerMsg.password">
     确认密码：<input type="password" required name="password2"
+    autocomplete="off"
     ng-model="vm.affirmPassword">
     <button ng-click="vm.signIn()"
       ng-disabled="vm.ifUsername || (vm.affirmPassword !== vm.registerMsg.password) || user.$invalid">注册</button>

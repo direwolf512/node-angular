@@ -21,9 +21,8 @@
         </dt>
         <dd>
           <p class="header">
-            <a ng-href="{{val.link}}"
+            <a ng-href="/article/{{val.id}}"
                class="m-overflow-ellipsis title">{{val.title}}</a>
-            <a ng-href="{{val.author.link}}">{{val.author.name}}</a>
           </p>
           <p class="summary">{{val.summary}}</p>
           <p class="updated-at">{{val.updatedAt | date: 'yyyy-MM-dd'}}</p>

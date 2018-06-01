@@ -31,6 +31,7 @@
       login: login,
       register: register,
       judgeUserName: judgeUserName,
+      getArticle: getArticle,
       // 公共方法
       ready: ready
 
@@ -82,6 +83,40 @@
       return _commonAjax(_config);
     }
 
+    /**
+     * 获取文章列表
+     * @returns {Object}
+     */
+    function getArticles () {
+      var _config = {
+        url: 'http://localhost:3000/articles'
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 获取用戶列表
+     * @returns {Object}
+     */
+    function getUsers () {
+      var _config = {
+        url: 'http://localhost:3000/users'
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 获取文章详情
+     * @returns {Object}
+     */
+    function getArticle (id) {
+      var _config = {
+        url: 'http://localhost:3000/articles/' + id
+      };
+      return _commonAjax(_config);
+    }
 
     /**
      * 验证用户是否登录
@@ -120,30 +155,6 @@
         params: params || {
           limit: 10
         }
-      };
-
-      return _commonAjax(_config);
-    }
-
-    /**
-     * 获取文章列表
-     * @returns {Object}
-     */
-    function getArticles () {
-      var _config = {
-        url: 'http://localhost:3000/articles'
-      };
-
-      return _commonAjax(_config);
-    }
-
-    /**
-     * 获取用戶列表
-     * @returns {Object}
-     */
-    function getUsers () {
-      var _config = {
-        url: 'http://localhost:3000/users'
       };
 
       return _commonAjax(_config);

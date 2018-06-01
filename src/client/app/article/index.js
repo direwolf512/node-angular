@@ -14,6 +14,7 @@
 
   function Article (dataservice) {
     var vm = this;
+    vm.ifJoin = window.localStorage.getItem('userId') ? window.localStorage.getItem('userId') : null;
 
     active();
 
@@ -27,5 +28,6 @@
         vm.articles = _data;
       });
     }
+
   }
 })();

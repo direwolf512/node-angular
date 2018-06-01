@@ -24,7 +24,12 @@
     function userLogin() {
       dataservice.login(vm.loginMsg).then(function (res) {
         var _data = res.data;
-        alert(_data);
+        if (_data.msg === '登陆成功') {
+          window.localStorage.setItem('userId', _data.id);
+          //document.cookie = "userId=" + _data.id;
+        } else {
+          alert(_data.msg);
+        }
       });
     }
   }

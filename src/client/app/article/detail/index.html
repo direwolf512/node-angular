@@ -1,3 +1,7 @@
 <section>
-内容{{vm.articleId}}
+  <h2>{{vm.article.title}}</h2>
+  <h3>作者：{{vm.article.authorName}}</h3>
+  <img ng-src="{{vm.article.img}}" alt="">
+  <p>{{vm.article.summary}}</p>
+  <p>{{vm.article.updatedAt | date : 'yyyy-MM-dd HH:mm:ss'}}</p>
 </section>
