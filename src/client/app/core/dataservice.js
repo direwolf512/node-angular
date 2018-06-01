@@ -29,6 +29,8 @@
       getArticles: getArticles,
       getUsers: getUsers,
       login: login,
+      register: register,
+      judgeUserName: judgeUserName,
       // 公共方法
       ready: ready
 
@@ -37,6 +39,34 @@
     return service;
 
     //////////////////////////////////////////////////
+
+    /*
+     * 注册
+     * @param data 账号密码
+     * @returns {Object}
+     */
+    function register (data) {
+      var _config = {
+        method: 'POST',
+        url: 'http://localhost:3000/register',
+        data: data
+      };
+      return _commonAjax(_config);
+    }
+
+    /*
+     * 用户名防重
+     * @param data 账号
+     * @returns {Object}
+     */
+    function judgeUserName (data) {
+      var _config = {
+        method: 'POST',
+        url: 'http://localhost:3000/usernames',
+        data: data
+      };
+      return _commonAjax(_config);
+    }
 
     /*
      * 登录
@@ -49,17 +79,8 @@
         url: 'http://localhost:3000/login',
         data: data
       };
-
       return _commonAjax(_config);
     }
-    /*function login (data) {
-      var _config = {
-        method: 'GET',
-        url: 'http://localhost:3000/login'
-      };
-
-      return _commonAjax(_config);
-    }*/
 
 
     /**
@@ -173,7 +194,7 @@
     function _commonAjax (config) {
       var defer = $q.defer();
       var _config = {
-        headers: config.headers,
+        //headers: config.headers,
         method: config.method || 'GET',
         url: config.url || '/',
         params: config.params || {},

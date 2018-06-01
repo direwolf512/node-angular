@@ -30,6 +30,22 @@
             content: '全部用戶'
           }
         }
+      }, {
+        url: '/users/register',
+        config: {
+          templateUrl: 'app/users/register/index.html',
+          controller: 'UsersRegister',
+          controllerAs: 'vm',
+          title: '注册'
+        }
+      }, {
+        url: '/users/login',
+        config: {
+          templateUrl: 'app/users/login/index.html',
+          controller: 'UsersLogin',
+          controllerAs: 'vm',
+          title: '登录'
+        }
       }
     ];
   }

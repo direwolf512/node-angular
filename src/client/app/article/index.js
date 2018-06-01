@@ -14,23 +14,18 @@
 
   function Article (dataservice) {
     var vm = this;
-    vm.ifJoin = false;
 
     active();
 
     function active () {
+      getArticlesList();
+    }
+
+    function getArticlesList () {
       dataservice.getArticles().then(function (res) {
         var _data = res.data;
         vm.articles = _data;
-        console.log(res);
       });
-      var data = {
-        username: 'user1',
-        password: '123456'
-      };
-      /*dataservice.login(data).then(function (res) {
-        console.log(res);
-      })*/
     }
   }
 })();

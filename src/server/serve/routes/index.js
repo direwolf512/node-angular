@@ -10,70 +10,57 @@ var connection = mysql.createConnection({
   database : 'test'
 });
 
-registerSql = 'select * from user';
+usernamesSql = 'select * from user';
 loginSql = 'select * from user';
 
 /**
  * 注册
  */
-connection.query(registerSql,function (err, results) {
-  if (err){
-    console.log(err)
-  }else{
-    router.post('/register', function(req, res) {
-      res.header('Access-Control-Allow-Origin', '*');
-      res.send(results);
-    });
-  }
+router.post('/register', function(req, res) {
+  var user = req.body,
+    result = false;
+  var registerInsertSql = 'insert into user(username, password) values("' + user.username + '", "'+ user.password +'")';
+  connection.query(registerInsertSql, function (err) {
+    if (err) {
+      result = false;
+    } else {
+      result = true;
+    }
+    res.send(result);
+  });
 });
 
-router
-  .get('/login', function (req, res) {
-    connection.query(loginSql,function (err, results) {
-      if (err){
-        console.log(err)
-      }else{
-        res.send(results);
-      }
-    });
-  })
-  .post('/login', function(req, res) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8580/');
-    console.log(22222);
-    connection.query(loginSql,function (err, results) {
-      if (err){
-        console.log(err)
-      }else{
-        var user = req.body,
-          _data = {
-            "username": user.username,
-            "password": user.password
-          },
-          result = false;
-        for (var i = 0; i < results.length; i++) {
-          if (results[i].username === _data.username && results[i].password === _data.password) {
-            result = true;
-          }
+/**
+ * 用户名防重
+ */
+router.post('/usernames', function(req, res) {
+  connection.query(usernamesSql, function (err, results) {
+    if (err){
+      console.log(err)
+    }else{
+      var user = req.body,
+        _data = {
+          "username": user.username
+        },
+        result = false;
+      for (var i = 0; i < results.length; i++) {
+        if (results[i].username === _data.username) {
+          result = true;
         }
-        res.send('1111111');
       }
-    });
+      res.send(result);
+    }
   });
+});
 
 /**
- * 登录
+ * 注册
  */
-/*connection.query(loginSql,function (err, results) {
-  if (err){
-    console.log(err)
-  }else{
-    router
-      .get('/login', function (req, res) {
-        res.render('index', { title: '注册' });
-        console.log(1111)
-      })
-      .post('/login', function(req, res) {
-        console.log(22222);
+router.post('/login', function(req, res) {
+  connection.query(loginSql, function (err, results) {
+    if (err){
+      console.log(err)
+    }else{
       var user = req.body,
         _data = {
           "username": user.username,
@@ -81,13 +68,21 @@ router
         },
         result = false;
       for (var i = 0; i < results.length; i++) {
-        if (results[i].username === _data.username && results[i].password === _data.password) {
-          result = true;
+        if (results[i].username === _data.username) {
+          if (results[i].password === _data.password) {
+            result = '登陆成功';
+          } else {
+            result = '密码有误';
+          }
         }
       }
+      if (!result) {
+        result = '用户名不存在';
+      }
+      result = JSON.stringify(result)
       res.send(result);
-    });
-  }
-});*/
+    }
+  });
+});
 
 module.exports = router;
