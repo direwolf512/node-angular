@@ -9,11 +9,12 @@
     .module('app.article')
     .controller('ArticleAdd', ArticleAdd);
 
-  ArticleAdd.$inject = ['dataservice'];
+  ArticleAdd.$inject = ['$routeParams', 'dataservice'];
 
-  function ArticleAdd (dataservice) {
+  function ArticleAdd ($routeParams, dataservice) {
     var vm = this;
     vm.add = add;
+    vm.articleId = $routeParams.id ? $routeParams.id : null;
     vm.authorId = window.localStorage.getItem('userId');
     vm.article = {
       title: '',
@@ -26,11 +27,32 @@
     active();
 
     function active () {
-
+      if (vm.articleId) {
+        getArticle();
+      }
     }
 
-    function add () {
-      dataservice.addArticle(vm.article).then(function (data) {
+    function getArticle () {
+      dataservice.getArticle(vm.articleId).then(function (data) {
+        var _data = data.data;
+        vm.article = {
+          title: _data.title,
+          link: _data.link,
+          summary: _data.summary,
+          img: _data.img,
+          authorId: _data.authorId,
+          createdAt: _data.createdAt,
+          readQuantity: _data.readQuantity
+        };
+      })
+    }
+
+    function add (id) {
+      var params = {
+        id: id,
+        data: vm.article
+      };
+      dataservice.addArticle(params).then(function (data) {
         console.log(data);
         window.location.href = '/article/all';
       })

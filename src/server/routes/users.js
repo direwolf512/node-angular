@@ -10,12 +10,11 @@ var connection = mysql.createConnection({
   database : 'test'
 });
 
-usersSql = 'select * from user';
+var usersSql = 'select * from user';
 
 
 router.get('/', function(req, res) {
   connection.query(usersSql,function (err, results) {
-    console.log(results);
     if (err){
       console.log(err)
     }else{
@@ -26,7 +25,7 @@ router.get('/', function(req, res) {
 
 router.get('/*', function(req, res) {
   var id = req.url.split('/')[1].split('?')[0];
-  userSql = 'select * from user where id= "' + id + '"';
+  var userSql = 'select * from user where id= "' + id + '"';
   connection.query(userSql,function (err, results) {
     if (err){
       console.log(err)

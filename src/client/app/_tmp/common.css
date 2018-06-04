@@ -19,6 +19,10 @@ body ul {
 }
 body a {
   text-decoration: none;
+  color: #303030;
+}
+body a:hover {
+  color: #87cefa;
 }
 .m-overflow-ellipsis {
   overflow: hidden;

@@ -14,8 +14,8 @@ var connection = mysql.createConnection({
   database : 'test'
 });
 
-articlesSql = 'select * from articles';
-hotArticlesSql = 'select * from articles order by readQuantity DESC;';
+var articlesSql = 'select * from articles';
+var hotArticlesSql = 'select * from articles order by readQuantity DESC;';
 
 /**
  * 获取全部文章列表
@@ -51,8 +51,25 @@ router.post('/', function (req, res) {
   console.log(req.body);
   var _data = req.body,
     nowTime = new Date().getFullYear() + '-' + new Date().getMonth() + '-' + new Date().getDay();
-  var hotArticlesSql = 'insert into articles(title, link, summary, img, createdAt, updatedAt, readQuantity, authorId) values("'+ _data.title +'", "'+ _data.link +'", "'+ _data.summary +'", "'+ _data.img +'", "'+ nowTime +'", "'+ nowTime +'", "0", "'+ _data.authorId +'")';
-  connection.query(hotArticlesSql, function (err) {
+  var addArticlesSql = 'insert into articles(title, link, summary, img, createdAt, updatedAt, readQuantity, authorId) values("'+ _data.title +'", "'+ _data.link +'", "'+ _data.summary +'", "'+ _data.img +'", "'+ nowTime +'", "'+ nowTime +'", "0", "'+ _data.authorId +'")';
+  connection.query(addArticlesSql, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(true);
+    }
+  });
+});
+
+/**
+ * 編輯文章
+ */
+router.post('/*', function (req, res) {
+  var id = req.url.split('/')[1].split('?')[0];
+  var _data = req.body,
+    nowTime = new Date().getFullYear() + '-' + new Date().getMonth() + '-' + new Date().getDay();
+  var editArticleSql = 'update articles set title="'+ _data.title +'", link="'+ _data.link +'", summary="'+ _data.summary +'", img="'+ _data.img +'", createdAt="'+ _data.createdAt.slice(0,10) +'", updatedAt="'+ nowTime +'", readQuantity="'+ _data.readQuantity +'", authorId="'+ _data.authorId +'" where id="' + id + '";';
+  connection.query(editArticleSql, function (err) {
     if (err) {
       console.log(err);
     } else {
@@ -66,14 +83,14 @@ router.post('/', function (req, res) {
  */
 router.get('/*', function(req, res) {
   var id = req.url.split('/')[1].split('?')[0];
-  searchArticleSql = 'select * from articles where id= "' + id + '"';
+  var searchArticleSql = 'select * from articles where id= "' + id + '"';
   connection.query(searchArticleSql,function (err, results) {
     if (err){
       console.log(err)
     }else{
       var result = results[0],
-        userid = result.authorId;
-      searchUserSql = 'select * from user where id= "' + userid + '"';
+        userid = results[0].authorId;
+      var searchUserSql = 'select * from user where id= "' + userid + '"';
       connection.query(searchUserSql,function (err, results) {
         if (err) {
           console.log(err)

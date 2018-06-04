@@ -10,8 +10,8 @@ var connection = mysql.createConnection({
   database : 'test'
 });
 
-usernamesSql = 'select * from user';
-loginSql = 'select * from user';
+var usernamesSql = 'select * from user';
+var loginSql = 'select * from user';
 
 /**
  * 注册

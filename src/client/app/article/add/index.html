@@ -20,6 +20,6 @@
       <input type="text" name="img" id="img" autocomplete="off"
         ng-model="vm.article.img" required>
     </p>
-    <button ng-click="vm.add()" ng-disabled="article.$invalid">提交</button>
+    <button ng-click="vm.add(vm.articleId)" ng-disabled="article.$invalid">提交</button>
   </form>
 </section>

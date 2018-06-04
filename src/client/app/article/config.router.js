@@ -48,6 +48,14 @@
           title: '添加文章'
         }
       }, {
+        url: '/article/add/:id',
+        config: {
+          templateUrl: 'app/article/add/index.html',
+          controller: 'ArticleAdd',
+          controllerAs: 'vm',
+          title: '編輯文章'
+        }
+      }, {
 				url: '/article/:id',
 				config: {
 					templateUrl: 'app/article/detail/index.html',

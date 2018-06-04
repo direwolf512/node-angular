@@ -114,10 +114,11 @@
      * @returns {Object}
      */
     function addArticle (data) {
+      var url = (!!data.id) ? ('http://localhost:3000/articles/' + data.id) : ('http://localhost:3000/articles');
       var _config = {
         method: 'POST',
-        url: 'http://localhost:3000/articles',
-        data: data
+        url: url,
+        data: data.data
       };
 
       return _commonAjax(_config);
