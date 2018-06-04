@@ -33,10 +33,10 @@
           templateUrl: 'app/article/all/index.html',
           controller: 'ArticleAll',
           controllerAs: 'vm',
-          title: '全部',
+          title: '全部文章',
           settings: {
             nav: 1,
-            content: '全部'
+            content: '全部文章'
           }
         }
       }, {

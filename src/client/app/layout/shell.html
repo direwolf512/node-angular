@@ -2,12 +2,11 @@
   <div class="m-nav">
     <p class="nav-box">
       <a href="/">首页</a>
-      <a href="/article/all">all</a>
-      <a href="/users">allUsers</a>
+      <a ng-repeat="route in vm.navRoutes" ng-class="vm.isCurrent(route)" ng-href="{{route.originalPath}}"
+        ng-bind-html="route.settings.content | trustAsHtml"></a>
     </p>
     <p class="btn">
       <a ng-if="vm.ifJoin" ng-click="vm.logOut()">注销</a>
-      {{vm.ifJoin}}
     </p>
   </div>
   <section ng-view></section>
