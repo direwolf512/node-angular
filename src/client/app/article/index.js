@@ -23,7 +23,7 @@
     }
 
     function getArticlesList () {
-      dataservice.getArticles().then(function (res) {
+      dataservice.getHotArticles().then(function (res) {
         var _data = res.data;
         vm.articles = _data;
       });

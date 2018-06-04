@@ -21,17 +21,19 @@
       /*
        * Account
        */
-      checkLogin: checkLogin,
       getSuggestionAward: getSuggestionAward,
       addSuggestion: addSuggestion,
       deleteSuggestion: deleteSuggestion,
       setAttention: setAttention,
       getArticles: getArticles,
+      getHotArticles: getHotArticles,
       getUsers: getUsers,
+      getUser: getUser,
       login: login,
       register: register,
       judgeUserName: judgeUserName,
       getArticle: getArticle,
+      addArticle: addArticle,
       // 公共方法
       ready: ready
 
@@ -84,12 +86,38 @@
     }
 
     /**
+     * 获取热门文章列表
+     * @returns {Object}
+     */
+    function getHotArticles () {
+      var _config = {
+        url: 'http://localhost:3000/articles/hot'
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
      * 获取文章列表
      * @returns {Object}
      */
     function getArticles () {
       var _config = {
         url: 'http://localhost:3000/articles'
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 添加文章
+     * @returns {Object}
+     */
+    function addArticle (data) {
+      var _config = {
+        method: 'POST',
+        url: 'http://localhost:3000/articles',
+        data: data
       };
 
       return _commonAjax(_config);
@@ -108,23 +136,24 @@
     }
 
     /**
+     * 获取用戶信息
+     * @returns {Object}
+     */
+    function getUser (id) {
+      var _config = {
+        url: 'http://localhost:3000/users/' + id
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
      * 获取文章详情
      * @returns {Object}
      */
     function getArticle (id) {
       var _config = {
         url: 'http://localhost:3000/articles/' + id
-      };
-      return _commonAjax(_config);
-    }
-
-    /**
-     * 验证用户是否登录
-     * @returns {Object} promise
-     */
-    function checkLogin () {
-      var _config = {
-        url: '/account/checklogin'
       };
       return _commonAjax(_config);
     }

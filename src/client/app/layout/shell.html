@@ -5,8 +5,9 @@
       <a ng-repeat="route in vm.navRoutes" ng-class="vm.isCurrent(route)" ng-href="{{route.originalPath}}"
         ng-bind-html="route.settings.content | trustAsHtml"></a>
     </p>
-    <p class="btn">
-      <a ng-if="vm.ifJoin" ng-click="vm.logOut()">注销</a>
+    <p class="btn" ng-if="ifJoin">
+      <a ng-click="vm.logOut()">注销</a>
+      <a ng-href="/article/add">添加文章</a>
     </p>
   </div>
   <section ng-view></section>

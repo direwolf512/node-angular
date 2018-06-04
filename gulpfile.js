@@ -25,7 +25,7 @@ gulp.task('stylus', function () {
 });
 
 gulp.task('inject', function () {
-  var cssSources = gulp.src(['./src/client/app/_tmp/*.css', '!./src/client/app/bower_components/**/*.css']),
+  var cssSources = gulp.src(['./src/client/app/_tmp/**.css', '!./src/client/app/bower_components/**/*.css']),
     moduleSources = gulp.src(['./src/client/app/**/*.module.js']),
     jsSources = gulp.src(['./src/client/app/**/*.js', '!./src/client/app/**/*.module.js', '!./src/client/app/bower_components/**/*.js'])
       .pipe(angularFilesort()),

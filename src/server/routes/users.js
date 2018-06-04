@@ -10,16 +10,32 @@ var connection = mysql.createConnection({
   database : 'test'
 });
 
-sql = 'select * from user';
+usersSql = 'select * from user';
 
-connection.query(sql,function (err, results) {
-  if (err){
-    console.log(err)
-  }else{
-    router.get('/', function(req, res) {
+
+router.get('/', function(req, res) {
+  connection.query(usersSql,function (err, results) {
+    console.log(results);
+    if (err){
+      console.log(err)
+    }else{
       res.send(results);
-    });
-  }
+    }
+  });
+});
+
+router.get('/*', function(req, res) {
+  var id = req.url.split('/')[1].split('?')[0];
+  userSql = 'select * from user where id= "' + id + '"';
+  connection.query(userSql,function (err, results) {
+    if (err){
+      console.log(err)
+    }else{
+      var result = results[0];
+      result.password = null;
+      res.send(result);
+    }
+  });
 });
 
 module.exports = router;

@@ -40,6 +40,14 @@
           }
         }
       }, {
+        url: '/article/add',
+        config: {
+          templateUrl: 'app/article/add/index.html',
+          controller: 'ArticleAdd',
+          controllerAs: 'vm',
+          title: '添加文章'
+        }
+      }, {
 				url: '/article/:id',
 				config: {
 					templateUrl: 'app/article/detail/index.html',

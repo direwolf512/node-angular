@@ -1,3 +1,7 @@
 <section>
-  全部
+  <ul>
+    <li ng-repeat="article in vm.articles">
+      <a ng-href="/article/{{article.id}}">{{article.title}}</a>
+    </li>
+  </ul>
 </section>
