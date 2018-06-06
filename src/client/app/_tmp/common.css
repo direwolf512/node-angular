@@ -16,6 +16,8 @@ body ol,
 body li,
 body ul {
   margin: 0;
+  text-decoration: none;
+  list-style: none;
 }
 body a {
   text-decoration: none;

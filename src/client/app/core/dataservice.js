@@ -26,6 +26,7 @@
       deleteSuggestion: deleteSuggestion,
       setAttention: setAttention,
       getArticles: getArticles,
+      getUserArticles: getUserArticles,
       getHotArticles: getHotArticles,
       getUsers: getUsers,
       getUser: getUser,
@@ -104,6 +105,18 @@
     function getArticles () {
       var _config = {
         url: 'http://localhost:3000/articles'
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 获取用户文章列表
+     * @returns {Object}
+     */
+    function getUserArticles (id) {
+      var _config = {
+        url: 'http://localhost:3000/articles/user/' + id
       };
 
       return _commonAjax(_config);

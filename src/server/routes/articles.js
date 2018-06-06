@@ -79,6 +79,21 @@ router.post('/*', function (req, res) {
 });
 
 /**
+ * 获取全部文章列表
+ */
+router.get('/user/*', function(req, res) {
+  var authorId = req.url.split('/')[2].split('?')[0];
+  var searchUserArticlesSql = 'select * from articles where authorId= "' + authorId + '"';
+  connection.query(searchUserArticlesSql,function (err, results) {
+    if (err){
+      console.log(err)
+    }else{
+      res.send(results);
+    }
+  });
+});
+
+/**
  * 获取文章内容
  */
 router.get('/*', function(req, res) {

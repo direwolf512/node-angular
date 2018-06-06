@@ -14,6 +14,10 @@
 
   function UsersAll (dataservice) {
     var vm = this;
+    vm.userArticles = userArticles;
+    vm.choiceId  =null;
+    vm.articles = [];
+    vm.users = [];
 
     active();
 
@@ -21,8 +25,17 @@
       dataservice.getUsers().then(function (res) {
         var _data = res.data;
         vm.users = _data;
-        console.log(_data);
+        vm.choiceId = _data[0].id;
+        userArticles(_data[0].id);
       });
+    }
+
+    function userArticles (id) {
+      vm.choiceId = id;
+      dataservice.getUserArticles(id).then(function (res) {
+        var _data = res.data;
+        vm.articles = _data;
+      })
     }
   }
 })();
