@@ -2,6 +2,7 @@
   <ul>
     <li ng-repeat="article in vm.articles">
       <a ng-href="/article/{{article.id}}">{{article.title}}</a>
+      <span>{{article.readQuantity}}</span>
     </li>
   </ul>
 </section>

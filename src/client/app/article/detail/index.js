@@ -15,6 +15,9 @@
 		
 		function active () {
 			getDetail();
+			dataservice.readArticle(vm.articleId).then(function (res) {
+				console.log(res);
+			})
 		}
 
 		function getDetail () {
@@ -23,5 +26,6 @@
 				vm.article = _data;
 			});
 		}
+
 	}
 })();

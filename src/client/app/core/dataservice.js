@@ -35,6 +35,7 @@
       judgeUserName: judgeUserName,
       getArticle: getArticle,
       addArticle: addArticle,
+      readArticle: readArticle,
       // 公共方法
       ready: ready
 
@@ -132,6 +133,22 @@
         method: 'POST',
         url: url,
         data: data.data
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 增加文章阅读量
+     * @returns {Object}
+     */
+    function readArticle (id) {
+      var _config = {
+        method: 'POST',
+        url: 'http://localhost:3000/articles/readQuantity',
+        data: {
+          id: id
+        }
       };
 
       return _commonAjax(_config);

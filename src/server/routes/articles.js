@@ -62,6 +62,29 @@ router.post('/', function (req, res) {
 });
 
 /**
+ * 增加文章阅读量
+ */
+router.post('/readQuantity', function (req, res) {
+  var id = req.body.id,
+    searchArticleSql = 'select * from articles where id= "' + id + '"';
+  connection.query(searchArticleSql,function (err, results) {
+    if (err) {
+      console.log(err)
+    } else {
+      var result = results[0],
+        readQuantity = result.readQuantity + 1;
+      var updateArticle = 'update articles set readQuantity="' + readQuantity + '"where id="' + id + '";';
+      connection.query(updateArticle, function (err) {
+        if (err) {
+          console.log(err)
+        }
+        res.send(result);
+      });
+    }
+  })
+});
+
+/**
  * 編輯文章
  */
 router.post('/*', function (req, res) {
