@@ -9,8 +9,10 @@
   <!-- endbower -->
 
   <!-- inject:css -->
+  <link rel="stylesheet" href="./app/_tmp/article-add.css">
   <link rel="stylesheet" href="./app/_tmp/article.css">
   <link rel="stylesheet" href="./app/_tmp/common.css">
+  <link rel="stylesheet" href="./app/_tmp/users-list.css">
   <!-- endinject -->
 </head>
 <body>
@@ -25,21 +27,41 @@
   <!-- endbower -->
 
   <!-- module:js -->
+
   <script src="./app/app.module.js"></script>
+
   <script src="./app/article/article.module.js"></script>
+
   <script src="./app/core/core.module.js"></script>
+
   <script src="./app/layout/layout.module.js"></script>
+
+  <script src="./app/users/users.module.js"></script>
+
+  <script src="./app/blocks/exception/exception.module.js"></script>
+
   <script src="./app/blocks/http/http.module.js"></script>
+
   <script src="./app/blocks/logger/logger.module.js"></script>
+
   <script src="./app/blocks/router/router.module.js"></script>
+
   <!-- endinject -->
 
   <!-- inject:js -->
   <script src="./app/blocks/router/router.js"></script>
   <script src="./app/blocks/logger/logger.js"></script>
   <script src="./app/blocks/http/http.js"></script>
+  <script src="./app/blocks/exception/exception.js"></script>
+  <script src="./app/blocks/exception/exception-handler.provider.js"></script>
+  <script src="./app/users/detail/index.js"></script>
+  <script src="./app/users/register/index.js"></script>
+  <script src="./app/users/login/index.js"></script>
   <script src="./app/article/detail/index.js"></script>
   <script src="./app/article/all/index.js"></script>
+  <script src="./app/article/add/index.js"></script>
+  <script src="./app/users/index.js"></script>
+  <script src="./app/users/config.router.js"></script>
   <script src="./app/layout/shell.js"></script>
   <script src="./app/core/utils.js"></script>
   <script src="./app/core/run.js"></script>

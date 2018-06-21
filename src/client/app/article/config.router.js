@@ -33,11 +33,27 @@
           templateUrl: 'app/article/all/index.html',
           controller: 'ArticleAll',
           controllerAs: 'vm',
-          title: '全部',
+          title: '全部文章',
           settings: {
             nav: 1,
-            content: '全部'
+            content: '全部文章'
           }
+        }
+      }, {
+        url: '/article/add',
+        config: {
+          templateUrl: 'app/article/add/index.html',
+          controller: 'ArticleAdd',
+          controllerAs: 'vm',
+          title: '添加文章'
+        }
+      }, {
+        url: '/article/add/:id',
+        config: {
+          templateUrl: 'app/article/add/index.html',
+          controller: 'ArticleAdd',
+          controllerAs: 'vm',
+          title: '編輯文章'
         }
       }, {
 				url: '/article/:id',

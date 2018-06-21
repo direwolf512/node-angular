@@ -9,6 +9,7 @@
     'app.core',
 
     'app.article',
-    'app.layout'
+    'app.layout',
+    'app.users'
   ]);
 })();

@@ -9,15 +9,23 @@
     .module('app.article')
     .controller('ArticleAll', ArticleAll);
 
-  ArticleAll.$inject = [];
+  ArticleAll.$inject = ['dataservice'];
 
-  function ArticleAll () {
+  function ArticleAll (dataservice) {
     var vm = this;
+    vm.articles = [];
 
     active();
 
     function active () {
+      getArticles();
+    }
 
+    function getArticles () {
+      dataservice.getArticles().then(function (data) {
+        var _data = data.data;
+        vm.articles = _data;
+      })
     }
   }
 })();

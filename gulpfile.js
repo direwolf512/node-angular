@@ -11,6 +11,7 @@ var gulp = require('gulp'),
   uglify = require('gulp-uglify'),
   wiredep = require('wiredep').stream,
   browserSync = require('browser-sync').create(),
+  modRewrite = require('connect-modrewrite'),
   reload = browserSync.reload;
 
 gulp.task('stylus', function () {
@@ -24,7 +25,7 @@ gulp.task('stylus', function () {
 });
 
 gulp.task('inject', function () {
-  var cssSources = gulp.src(['./src/client/app/_tmp/*.css', '!./src/client/app/bower_components/**/*.css']),
+  var cssSources = gulp.src(['./src/client/app/_tmp/**.css', '!./src/client/app/bower_components/**/*.css']),
     moduleSources = gulp.src(['./src/client/app/**/*.module.js']),
     jsSources = gulp.src(['./src/client/app/**/*.js', '!./src/client/app/**/*.module.js', '!./src/client/app/bower_components/**/*.js'])
       .pipe(angularFilesort()),
@@ -67,7 +68,14 @@ gulp.task('browser-sync', function() {
       baseDir: "./src/client",
       index: 'index.html'
     },
-    port: 8580
+    port: 8580,
+    //解決刷新404
+    middleware: [
+      modRewrite([
+        '^/users\\S* /index.html [L]',
+        '^/article\\S* /index.html [L]'
+      ])
+    ]
   });
 });
 

@@ -1,0 +1,19 @@
+<section class="users-wrap">
+  <div class="nav">
+    <ul>
+      <li ng-repeat="user in vm.users"
+        ng-click="vm.userArticles(user.id)" ng-class="{'acitve': user.id === vm.choiceId}">
+        {{user.username}}
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <ul ng-if="vm.articles.length > 0">
+      <li ng-repeat="article in vm.articles">
+        <a ng-href="/article/{{article.id}}">{{article.title}}</a>
+      </li>
+    </ul>
+    <p ng-if="vm.articles.length === 0">该用户暂无文章发布</p>
+  </div>
+
+</section>

@@ -5,17 +5,27 @@
 		.module('app.article')
 		.controller('ArticleDetail', ArticleDetail);
 
-	ArticleDetail.$inject = ['$location'];
+	ArticleDetail.$inject = ['$routeParams', 'dataservice'];
 
-	function ArticleDetail ($location) {
+	function ArticleDetail ($routeParams, dataservice) {
 		var vm = this;
-		vm.sss = $location.path().split('/');
-		vm.articleId = vm.sss[2];
+		vm.articleId = $routeParams.id;
 		
 		active();
 		
 		function active () {
-			
+			getDetail();
+			dataservice.readArticle(vm.articleId).then(function (res) {
+				console.log(res);
+			})
 		}
+
+		function getDetail () {
+			dataservice.getArticle(vm.articleId).then(function (res) {
+				var _data = res.data;
+				vm.article = _data;
+			});
+		}
+
 	}
 })();

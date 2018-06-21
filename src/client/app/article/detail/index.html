@@ -1,3 +1,8 @@
 <section>
-内容{{vm.articleId}}
+  <h2>{{vm.article.title}}</h2>
+  <a ng-href="/article/add/{{vm.article.id}}" ng-if="vm.article.authorId == id">编辑</a>
+  <h3>作者：{{vm.article.authorName}}</h3>
+  <img ng-src="{{vm.article.img}}" alt="">
+  <p>{{vm.article.summary}}</p>
+  <p>{{vm.article.updatedAt | date : 'yyyy-MM-dd'}}</p>
 </section>

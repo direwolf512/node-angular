@@ -10,10 +10,10 @@
     .module('app.core')
     .factory('dataservice', dataservice);
 
-  dataservice.$inject = ['$http', '$cookies', '$q', 'exception', 'logger'];
+  dataservice.$inject = ['$http', '$q', 'exception', 'logger'];
 
   /* @ngInject */
-  function dataservice ($http, $cookies, $q, exception, logger) {
+  function dataservice ($http, $q, exception, logger) {
     var isPrimed = false;
     var primePromise;
 
@@ -21,11 +21,21 @@
       /*
        * Account
        */
-      checkLogin: checkLogin,
       getSuggestionAward: getSuggestionAward,
       addSuggestion: addSuggestion,
       deleteSuggestion: deleteSuggestion,
       setAttention: setAttention,
+      getArticles: getArticles,
+      getUserArticles: getUserArticles,
+      getHotArticles: getHotArticles,
+      getUsers: getUsers,
+      getUser: getUser,
+      login: login,
+      register: register,
+      judgeUserName: judgeUserName,
+      getArticle: getArticle,
+      addArticle: addArticle,
+      readArticle: readArticle,
       // 公共方法
       ready: ready
 
@@ -35,13 +45,146 @@
 
     //////////////////////////////////////////////////
 
-    /**
-     * 验证用户是否登录
-     * @returns {Object} promise
+    /*
+     * 注册
+     * @param data 账号密码
+     * @returns {Object}
      */
-    function checkLogin () {
+    function register (data) {
       var _config = {
-        url: '/account/checklogin'
+        method: 'POST',
+        url: 'http://localhost:3000/register',
+        data: data
+      };
+      return _commonAjax(_config);
+    }
+
+    /*
+     * 用户名防重
+     * @param data 账号
+     * @returns {Object}
+     */
+    function judgeUserName (data) {
+      var _config = {
+        method: 'POST',
+        url: 'http://localhost:3000/usernames',
+        data: data
+      };
+      return _commonAjax(_config);
+    }
+
+    /*
+     * 登录
+     * @param data 账号密码
+     * @returns {Object}
+     */
+    function login (data) {
+      var _config = {
+        method: 'POST',
+        url: 'http://localhost:3000/login',
+        data: data
+      };
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 获取热门文章列表
+     * @returns {Object}
+     */
+    function getHotArticles () {
+      var _config = {
+        url: 'http://localhost:3000/articles/hot'
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 获取文章列表
+     * @returns {Object}
+     */
+    function getArticles () {
+      var _config = {
+        url: 'http://localhost:3000/articles'
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 获取用户文章列表
+     * @returns {Object}
+     */
+    function getUserArticles (id) {
+      var _config = {
+        url: 'http://localhost:3000/articles/user/' + id
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 添加文章
+     * @returns {Object}
+     */
+    function addArticle (data) {
+      var url = (!!data.id) ? ('http://localhost:3000/articles/' + data.id) : ('http://localhost:3000/articles');
+      var _config = {
+        method: 'POST',
+        url: url,
+        data: data.data
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 增加文章阅读量
+     * @returns {Object}
+     */
+    function readArticle (id) {
+      var _config = {
+        method: 'POST',
+        url: 'http://localhost:3000/articles/readQuantity',
+        data: {
+          id: id
+        }
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 获取用戶列表
+     * @returns {Object}
+     */
+    function getUsers () {
+      var _config = {
+        url: 'http://localhost:3000/users'
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 获取用戶信息
+     * @returns {Object}
+     */
+    function getUser (id) {
+      var _config = {
+        url: 'http://localhost:3000/users/' + id
+      };
+
+      return _commonAjax(_config);
+    }
+
+    /**
+     * 获取文章详情
+     * @returns {Object}
+     */
+    function getArticle (id) {
+      var _config = {
+        url: 'http://localhost:3000/articles/' + id
       };
       return _commonAjax(_config);
     }
@@ -121,9 +264,8 @@
      */
     function _commonAjax (config) {
       var defer = $q.defer();
-      var headers = angular.merge({}, config.headers, {'X-CSRF-TOKEN': $cookies.get('connect_csrf') || ''});
       var _config = {
-        headers: headers,
+        //headers: config.headers,
         method: config.method || 'GET',
         url: config.url || '/',
         params: config.params || {},
