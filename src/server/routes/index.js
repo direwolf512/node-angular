@@ -54,7 +54,7 @@ router.post('/usernames', function(req, res) {
 });
 
 /**
- * 注册
+ * 登录
  */
 router.post('/login', function(req, res) {
   connection.query(loginSql, function (err, results) {
