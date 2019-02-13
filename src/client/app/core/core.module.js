@@ -8,6 +8,12 @@
 
   angular
     .module('app.core', [
-      'blocks.logger', 'blocks.router', 'blocks.http', 'blocks.exception','ui.bootstrap'
+      /* Angular modules */
+
+      /* Cross-app modules */
+      'blocks.logger', 'blocks.router', 'blocks.http', 'blocks.exception',
+
+      /* 3rd-party modules */
+      'ui.bootstrap', 'ngFileUpload'
     ])
 })();

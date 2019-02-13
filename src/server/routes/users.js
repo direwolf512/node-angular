@@ -37,7 +37,7 @@ router.get('/*', function(req, res) {
       console.log(err)
     }else{
       var result = results[0];
-      result.password = null;
+      delete result.password;
       connection.query(searchUserArticlesSql,function (err, results) {
         if (err){
           console.log(err)

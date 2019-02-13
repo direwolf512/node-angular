@@ -52,7 +52,6 @@
         data: vm.article
       };
       dataservice.addArticle(params).then(function (data) {
-        console.log(data);
         window.location.href = '/article/all';
       })
     }

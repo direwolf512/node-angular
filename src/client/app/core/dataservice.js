@@ -36,6 +36,7 @@
       getArticle: getArticle,
       addArticle: addArticle,
       readArticle: readArticle,
+      sss: sss,
       // 公共方法
       ready: ready
 
@@ -133,6 +134,20 @@
         method: 'POST',
         url: url,
         data: data.data
+      };
+
+      return _commonAjax(_config);
+    }
+
+
+    function sss (data) {
+      var _config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        method: 'POST',
+        url: 'http://localhost:3000/files/profile/photo',
+        data: data
       };
 
       return _commonAjax(_config);
@@ -265,7 +280,7 @@
     function _commonAjax (config) {
       var defer = $q.defer();
       var _config = {
-        //headers: config.headers,
+        headers: config.headers || {},
         method: config.method || 'GET',
         url: config.url || '/',
         params: config.params || {},

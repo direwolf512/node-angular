@@ -24,6 +24,7 @@
 - 建立两张表：`user` + `articles`
     user: id + username + password
     articles: id + title + link + summary + img + createAt + updatedAt + readQuantity + authorId + authorName
+- 将 `.\src\server\routes\index.js` 中 `password` 改成自己的密码
 
 ### 4 启动
 - 前端：gulp serve-dev (在主目录下)

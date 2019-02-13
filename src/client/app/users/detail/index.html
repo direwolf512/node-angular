@@ -1,12 +1,17 @@
 <section class="user-detail">
   <div class="user-info">
     <p class="profile-photo">
-      <img src="https://img.alicdn.com/tfs/TB1UzTgDwHqK1RjSZFEXXcGMXXa-188-198.png" alt="">
+      <img ng-src="{{vm.userMsg.profilePhoto ? vm.userMsg.profilePhoto : 'https://img.alicdn.com/tfs/TB1uUyHGXzqK1RjSZSgXXcpAVXa-1600-899.jpg'}}"
+        alt=""
+        ngf-select="vm.uploadPhoto($files, $invalidFiles)"
+        ngf-accept="'image/png,image/gif,image/jpg,image/jpeg,image/PNG,image/GIF,image/JPG,image/JPEG'"
+        ngf-max-size="3.5MB"
+        ngf-pattern="'image/png,image/gif,image/jpg,image/jpeg,image/PNG,image/GIF,image/JPG,image/JPEG'">
     </p>
     <div class="introduction">
-      <p>{{user.username}}</p>
+      <p>{{vm.userMsg.username}}</p>
       <p>
-        <span>文章数：{{user.articleNum}}</span>
+        <span>文章数：{{vm.userMsg.articleNum}}</span>
         <span>关注数：</span>
         <span>粉丝数：</span>
       </p>
