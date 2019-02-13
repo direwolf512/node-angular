@@ -46,6 +46,14 @@
           controllerAs: 'vm',
           title: '登录'
         }
+      }, {
+        url: '/users/detail/:id',
+        config: {
+          templateUrl: 'app/users/detail/index.html',
+          controller: 'UserDetail',
+          controllerAs: 'vm',
+          title: '个人主页'
+        }
       }
     ];
   }

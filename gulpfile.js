@@ -16,22 +16,21 @@ var gulp = require('gulp'),
 
 gulp.task('stylus', function () {
   return gulp
-    .src('./src/client/styles/*.styl')
+    .src(['./src/client/styles/*.styl', './src/client/app/widgets/**/*.styl'])
     .pipe(stylus({
       comoress: false,
       'include css': true
     }))
-    .pipe(gulp.dest('./src/client/app/_tmp'))
+    .pipe(gulp.dest('./src/client/app/_tmp/styles/'))
 });
 
 gulp.task('inject', function () {
-  var cssSources = gulp.src(['./src/client/app/_tmp/**.css', '!./src/client/app/bower_components/**/*.css']),
+  var cssSources = gulp.src(['./src/client/app/_tmp/**/**.css', '!./src/client/app/bower_components/**/*.css']),
     moduleSources = gulp.src(['./src/client/app/**/*.module.js']),
     jsSources = gulp.src(['./src/client/app/**/*.js', '!./src/client/app/**/*.module.js', '!./src/client/app/bower_components/**/*.js'])
       .pipe(angularFilesort()),
     cssOptions = {
-      ignorePath: '/src/client/app',
-      addPrefix: './app',
+      ignorePath: '/src/client',
       addRootSlash: false
     },
     moduleOptions = {
@@ -59,6 +58,7 @@ gulp.task('inject', function () {
 gulp.task('serve', function () {
   gulp.watch('./src/client/app/**/*.html').on('change', reload);
   gulp.watch('./src/client/styles/*.styl', ['stylus']);
+  gulp.watch('./src/client/app/widgets/**/*.styl', ['stylus']);
   //gulp.watch('./src/client/app/**/*.js', ['concatUglify']);
 });
 
@@ -79,4 +79,4 @@ gulp.task('browser-sync', function() {
   });
 });
 
-gulp.task('default', ['browser-sync', 'inject', 'stylus', 'serve']);
+gulp.task('serve-dev', ['browser-sync', 'inject', 'stylus', 'serve']);

@@ -40,7 +40,6 @@
           link: _data.link,
           summary: _data.summary,
           img: _data.img,
-          authorId: _data.authorId,
           createdAt: _data.createdAt,
           readQuantity: _data.readQuantity
         };

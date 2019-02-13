@@ -8,6 +8,6 @@
 
   angular
     .module('app.core', [
-      'blocks.logger', 'blocks.router', 'blocks.http', 'blocks.exception'
+      'blocks.logger', 'blocks.router', 'blocks.http', 'blocks.exception','ui.bootstrap'
     ])
 })();

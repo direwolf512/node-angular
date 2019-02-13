@@ -9,8 +9,8 @@
     .module('app.layout')
     .controller('Shell', Shell);
 
-  Shell.$inject = ['$route', '$location', 'routehelper'];
-  function Shell ($route, $location, routehelper) {
+  Shell.$inject = ['$route', '$location', 'routehelper', '$uibModal'];
+  function Shell ($route, $location, routehelper, $uibModal) {
     var vm = this;
     vm.ifJoin = window.localStorage.getItem('userId') ? window.localStorage.getItem('userId') : null;
     vm.logOut = logOut;
@@ -25,10 +25,28 @@
     }
 
     function logOut () {
-      window.localStorage.setItem('userId', '');
-      //document.cookie = "userId=" + null + ';path=/;';
-      location.href = '/';
+      $uibModal.open({
+        size: 'confirm-dialog-modal',
+        animation: true,
+        templateUrl: 'app/widgets/dialogs/confirm/index.html',
+        controller: 'confirmDialog',
+        controllerAs: '$ctrl',
+        backdrop: 'static',
+        resolve: {
+          data: {
+            title: '注销提示',
+            con: '您确定要注销当前账号吗？',
+            btnSure: {
+              name: '注销'
+            },
+            btnRefuse: {
+              name: '取消'
+            }
+          }
+        }
+      })
     }
+
 
     /**
      * 初始化导航

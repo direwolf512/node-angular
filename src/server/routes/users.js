@@ -12,7 +12,9 @@ var connection = mysql.createConnection({
 
 var usersSql = 'select * from user';
 
-
+/**
+ * 获取用户列表
+ */
 router.get('/', function(req, res) {
   connection.query(usersSql,function (err, results) {
     if (err){
@@ -23,16 +25,27 @@ router.get('/', function(req, res) {
   });
 });
 
+/**
+ * 获取用户信息
+ */
 router.get('/*', function(req, res) {
   var id = req.url.split('/')[1].split('?')[0];
-  var userSql = 'select * from user where id= "' + id + '"';
+  var userSql = 'select * from user where id= "' + id + '"',
+    searchUserArticlesSql = 'select * from articles where authorId= "' + id + '"';
   connection.query(userSql,function (err, results) {
     if (err){
       console.log(err)
     }else{
       var result = results[0];
       result.password = null;
-      res.send(result);
+      connection.query(searchUserArticlesSql,function (err, results) {
+        if (err){
+          console.log(err)
+        }else{
+          result.articleNum = results.length;
+          res.send(result);
+        }
+      });
     }
   });
 });

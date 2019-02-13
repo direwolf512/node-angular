@@ -1,3 +1,49 @@
-<section>
-
+<section class="user-detail">
+  <div class="user-info">
+    <p class="profile-photo">
+      <img src="https://img.alicdn.com/tfs/TB1UzTgDwHqK1RjSZFEXXcGMXXa-188-198.png" alt="">
+    </p>
+    <div class="introduction">
+      <p>{{user.username}}</p>
+      <p>
+        <span>文章数：{{user.articleNum}}</span>
+        <span>关注数：</span>
+        <span>粉丝数：</span>
+      </p>
+    </div>
+  </div>
+  <div class="user-detail-content">
+    <ul class="navs">
+      <li class="header">个人主页</li>
+      <li ng-repeat="nav in vm.navs" class="nav"
+        ng-class="{'active': vm.navNum === $index}"
+        ng-click="vm.navNum = $index">{{nav.name}}</li>
+    </ul>
+    <div class="content">
+      <div ng-if="vm.navNum === 0" class="article-list">
+        <p class="title">文章列表</p>
+        <div ng-if="vm.articles.length !== 0">
+          <a ng-href="/article/{{article.id}}" ng-repeat="article in vm.articles"
+            class="article">
+            <dl>
+              <dt>
+                <img ng-src="{{article.img}}" alt="">
+              </dt>
+              <dd>
+                <p class="article-header">
+                  <span class="article-title m-overflow-ellipsis">{{article.title}}</span>
+                  <span class="updated-at">{{article.updatedAt | date : 'yyyy-MM-dd'}}</span>
+                </p>
+                <p class="article-summary">{{article.summary}}</p>
+              </dd>
+            </dl>
+          </a>
+        </div>
+        <div ng-if="vm.articles.length === 0" class="no-data">
+          您还没有发表过文章
+        </div>
+      </div>
+      <div ng-if="vm.navNum === 1">1111111111</div>
+    </div>
+  </div>
 </section>

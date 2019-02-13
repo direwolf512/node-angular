@@ -1,7 +1,7 @@
 <section>
   <h2>{{vm.article.title}}</h2>
-  <a ng-href="/article/add/{{vm.article.id}}" ng-if="vm.article.authorId == id">编辑</a>
-  <h3>作者：{{vm.article.authorName}}</h3>
+  <a ng-href="/article/add/{{vm.article.id}}" ng-if="vm.article.user.id == id">编辑</a>
+  <h3>作者：{{vm.article.user.name}}</h3>
   <img ng-src="{{vm.article.img}}" alt="">
   <p>{{vm.article.summary}}</p>
   <p>{{vm.article.updatedAt | date : 'yyyy-MM-dd'}}</p>

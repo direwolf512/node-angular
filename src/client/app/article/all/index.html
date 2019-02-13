@@ -1,8 +1,9 @@
-<section>
-  <ul>
+<section class="article-list-wrap">
+  <ul class="article-list">
     <li ng-repeat="article in vm.articles">
       <a ng-href="/article/{{article.id}}">{{article.title}}</a>
-      <span>{{article.readQuantity}}</span>
+      <span>作者：{{article.author.name}}</span>
+      <span>阅读量：{{article.readQuantity}}</span>
     </li>
   </ul>
 </section>

@@ -5,24 +5,30 @@
   <title>Title</title>
   <base href="/">
   <!-- bower:css -->
+  <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="app/bower_components/toastr/toastr.css" />
   <!-- endbower -->
 
   <!-- inject:css -->
-  <link rel="stylesheet" href="./app/_tmp/article-add.css">
-  <link rel="stylesheet" href="./app/_tmp/article.css">
-  <link rel="stylesheet" href="./app/_tmp/common.css">
-  <link rel="stylesheet" href="./app/_tmp/users-list.css">
+  <link rel="stylesheet" href="app/_tmp/styles/article-add.css">
+  <link rel="stylesheet" href="app/_tmp/styles/article-list-wrap.css">
+  <link rel="stylesheet" href="app/_tmp/styles/article.css">
+  <link rel="stylesheet" href="app/_tmp/styles/common.css">
+  <link rel="stylesheet" href="app/_tmp/styles/users-detail.css">
+  <link rel="stylesheet" href="app/_tmp/styles/users-list.css">
+  <link rel="stylesheet" href="app/_tmp/styles/dialogs/confirm/index.css">
   <!-- endinject -->
 </head>
-<body>
+<body class="body">
   <div ng-include="'app/layout/shell.html'"></div>
 
   <!-- bower:js -->
   <script src="app/bower_components/angular/angular.js"></script>
   <script src="app/bower_components/moment/moment.js"></script>
-  <script src="app/bower_components/angular-route/angular-route.js"></script>
   <script src="app/bower_components/jquery/dist/jquery.js"></script>
+  <script src="app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="app/bower_components/angular-route/angular-route.js"></script>
+  <script src="app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="app/bower_components/toastr/toastr.js"></script>
   <!-- endbower -->
 
@@ -34,13 +40,15 @@
 
   <script src="./app/core/core.module.js"></script>
 
-  <script src="./app/layout/layout.module.js"></script>
-
   <script src="./app/users/users.module.js"></script>
 
-  <script src="./app/blocks/exception/exception.module.js"></script>
+  <script src="./app/widgets/widgets.module.js"></script>
+
+  <script src="./app/layout/layout.module.js"></script>
 
   <script src="./app/blocks/http/http.module.js"></script>
+
+  <script src="./app/blocks/exception/exception.module.js"></script>
 
   <script src="./app/blocks/logger/logger.module.js"></script>
 
@@ -49,20 +57,21 @@
   <!-- endinject -->
 
   <!-- inject:js -->
-  <script src="./app/blocks/router/router.js"></script>
-  <script src="./app/blocks/logger/logger.js"></script>
-  <script src="./app/blocks/http/http.js"></script>
-  <script src="./app/blocks/exception/exception.js"></script>
-  <script src="./app/blocks/exception/exception-handler.provider.js"></script>
-  <script src="./app/users/detail/index.js"></script>
+  <script src="./app/widgets/dialogs/confirm/index.js"></script>
   <script src="./app/users/register/index.js"></script>
   <script src="./app/users/login/index.js"></script>
+  <script src="./app/users/detail/index.js"></script>
+  <script src="./app/blocks/router/router.js"></script>
+  <script src="./app/blocks/logger/logger.js"></script>
+  <script src="./app/blocks/exception/exception.js"></script>
+  <script src="./app/blocks/exception/exception-handler.provider.js"></script>
+  <script src="./app/blocks/http/http.js"></script>
   <script src="./app/article/detail/index.js"></script>
   <script src="./app/article/all/index.js"></script>
   <script src="./app/article/add/index.js"></script>
+  <script src="./app/layout/shell.js"></script>
   <script src="./app/users/index.js"></script>
   <script src="./app/users/config.router.js"></script>
-  <script src="./app/layout/shell.js"></script>
   <script src="./app/core/utils.js"></script>
   <script src="./app/core/run.js"></script>
   <script src="./app/core/filter.js"></script>
